@@ -3,6 +3,9 @@ from django.utils import timezone
 
 # Create your models here.
 
+class Wallet(models.Model):
+    id = models.IntegerField(primary_key=True)    
+    session = models.CharField(max_length=50)
 
 class Pages(models.Model):
     name = models.CharField(max_length=50)

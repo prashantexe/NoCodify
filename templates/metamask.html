@@ -1,0 +1,111 @@
+
+<html>
+  <head>
+    <title>MetaMask Connection Page</title>
+
+  </head>
+  <body>
+    <center>
+    <h1>Connect Your MetaMask Wallet Here!</h1>
+    <from >
+      {% csrf_token %}
+      <button id='connectWallet' onclick="">Connect Wallet</button>
+      <button id='getBalance' onclick="checkBalance()">Get Balance of Wallet</button>
+    </form>
+    
+    <p id="walletAddress"></p>
+    <p id="walletBalance"></p>
+
+    <script type="text/javascript">
+      window.userWalletAddress = null
+      const connectWallet = document.getElementById('connectWallet')
+      const walletAddress = document.getElementById('walletAddress')
+      const walletBalance = document.getElementById('walletBalance')
+
+
+
+      function checkInstalled() {
+        if (typeof window.ethereum == 'undefined') {
+          connectWallet.innerText = 'MetaMask isnt installed, please install it'
+          connectWallet.classList.remove()
+          connectWallet.classList.add()
+          return false
+        }
+        connectWallet.addEventListener('click', connectWalletwithMetaMask)
+      }
+
+      async function connectWalletwithMetaMask() {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+        .catch((e) => {
+        console.error(e.message)
+        return
+        })
+
+        if (!accounts) { return }
+
+          window.userWalletAddress = accounts[0]
+          Send_Data("save_wallet_address",window.userWalletAddress)
+          walletAddress.innerText = window.userWalletAddress
+
+          connectWallet.innerText = 'Sign Out'
+          connectWallet.removeEventListener('click', connectWalletwithMetaMask)
+          setTimeout(() => {
+            connectWallet.addEventListener('click', signOutOfMetaMask)
+          }, 200)
+      }
+
+
+      function signOutOfMetaMask() {
+        window.userwalletAddress = null
+        walletAddress.innerText = ''
+        connectWallet.innerText = 'Connect Wallet'
+
+        connectWallet.removeEventListener('click', signOutOfMetaMask)
+        setTimeout(() => {
+          connectWallet.addEventListener('click', connectWalletwithMetaMask)
+        }, 200  )
+      }
+
+      async function checkBalance() {
+        let balance = await window.ethereum.request({ method: "eth_getBalance",
+        params: [
+          window.userWalletAddress,
+          'latest'
+        ]
+      }).catch((err)=> {
+          console.log(err)
+      })
+
+      console.log(parseFloat((balance) / Math.pow(10,18)))
+
+      walletBalance.innerText = parseFloat((balance) / Math.pow(10,18))
+    }
+
+      window.addEventListener('DOMContentLoaded', () => {
+        checkInstalled()
+      })
+
+
+
+      function Send_Data(url,data) {
+
+        $.ajax({
+            method: "POST",
+            url: url,
+            data: {
+              "csrfmiddlewaretoken":$("input[name=csrfmiddlewaretoken]").val(),
+              'wallet_address':data,
+            },
+            success: function (data) {
+                location.reload();
+            }
+        });
+}
+
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>
+    </center>
+  </body>
+</html>
