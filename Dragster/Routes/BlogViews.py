@@ -32,16 +32,16 @@ def save_blog(request):
     # create an instance of the contract
     simple_storage = w3.eth.contract(
         address=contract_address, abi=contract_abi)
-    nonce = w3.eth.getTransactionCount(my_address)
+    nonce = w3.eth.get_transaction_count(my_address)
 
     print("transaction sucess..")
 
     greeting_transaction = simple_storage.functions.createBlogPost(
         str(title), str(description), str(
             content), str(Thumbnail), str(Category)
-    ).buildTransaction(
+    ).build_transaction(
         {
-            "chainId": w3.eth.chainId,
+            "chainId": w3.eth.chain_id,
             'gas': 700000,
             'gasPrice': w3.eth.gas_price,
             "from": my_address,

@@ -683,14 +683,15 @@
       }
 
       async function checkBalance() {
-        let balance = await window.ethereum.request({ method: "eth_getBalance",
-        params: [
-          window.userWalletAddress,
-          'latest'
-        ]
-      }).catch((err)=> {
-          console.log(err)
-      })
+        let balance = await window.ethereum.request({ 
+			method: "eth_getBalance",
+			params: [
+			  `{{ wallet.session }}`,
+			  'latest'
+			]
+		  }).catch((err)=> {
+			  console.log(err)
+		  })
 
       console.log(parseFloat((balance) / Math.pow(10,18)))
 
@@ -723,3 +724,4 @@
 </body>
 
 </html>
+

@@ -20,7 +20,6 @@ def save_wallet_address(request):
 
 def DisConnect(request):
     if request.method == 'POST':
-        print("runned.........")
         obj=Wallet.objects.all().delete()
         return render(request,'common/index.html',{'wallet':"Your wallet address is the key to unlocking the magic of the blockchain. Connect it now and explore the limitless possibilities!"})
 
