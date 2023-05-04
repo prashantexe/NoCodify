@@ -128,7 +128,9 @@ def savePage(request):
         print(response_3.text)
 
         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> End Polygone >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
+        os.remove('_'.join(name.split())+'.css')
+        os.remove('_'.join(name.split())+'(1).html')
+        os.remove('_'.join(name.split())+'.html')
         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Data Base >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         page = Pages.objects.create(
             name=Project_name, html=html, css=css, image=random_image(), Block_chin_blockNo=tx_receipt.blockNumber, trans_detial=tx_receipt, ipfs=response_1.text+" "+response_2.text+" "+response_3.text)
