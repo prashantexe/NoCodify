@@ -111,14 +111,16 @@
 		<div class="home-wrapper">
 			<div class="container">
 				<div class="row">
-
+		
 					<!-- home content -->
 					<div class="col-md-10 col-md-offset-1">
 						<div class="home-content">
-							<h1 class="white-text">NoCodify </h1>
-							<h4><p class="white-text">Revolutionize Your Crypto Projects with Our Powerful No-Code
-								Development Platform – Say Goodbye to Programming and Hello to Effortless Creation!!
-							</p></h4>
+							<h1 class="white-text">NoCodify</h1>
+							<h4>
+								<p class="white-text">
+									Revolutionize Your Crypto Projects with Our Powerful No-Code Development Platform – Say Goodbye to Programming and Hello to Effortless Creation!!
+								</p>
+							</h4>
 							<div class="wallet-buttons">
 								{% if wallet != 'Your wallet address is the key to unlocking the magic of the blockchain. Connect it now and explore the limitless possibilities!' %}
 									<form id="metamask-form" method="POST" action="{% url 'DisConnect' %}" >
@@ -138,23 +140,17 @@
 									</form>
 								{% endif %}
 								<button id='getBalance' class="white-btn" onclick="checkBalance()">Get Balance of Wallet</button>
-							</div>
+							</div><br>
 							{% if wallet != 'Your wallet address is the key to unlocking the magic of the blockchain. Connect it now and explore the limitless possibilities!' %}
-								<p id="walletAddress">{{ wallet.session }}</p>
+							<p id="walletAddress">{{ wallet.session }}</p>
 							{% else %}
-								<p id="walletAddress">{{ wallet }}</p>
+							<p id="walletAddress">{{ wallet }}</p>
 							{% endif %}
 							<p id="walletBalance"></p>
 						</div>
 					</div>
 					<!-- /home content -->
-						<style>
-						.wallet-buttons {
-							display: flex;
-							justify-content: space-between;
-							align-items: center;
-							height: 100%;
-						}</style>
+		
 				</div>
 			</div>
 		</div>
