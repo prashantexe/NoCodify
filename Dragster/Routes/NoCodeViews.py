@@ -23,14 +23,6 @@ def index(request):
     pages = Pages.objects.all()
     return render(request, 'NoCodeBuilderPages/pages.html', {"pages": pages})
 
-
-def connect_metamask(request):
-    # Connect to the local blockchain node
-    web3 = Web3(HTTPProvider(
-        'https://polygon-mumbai.g.alchemy.com/v2/K59YdNGK95akCLJrA1m9nYPZ7JYNa8Me'))
-    return render(request, 'common/index.html')
-
-
 def addPage(request):
     return render(request, 'NoCodeBuilderPages/index.html')
 
@@ -40,7 +32,8 @@ def savePage(request):
         html = request.POST['html']
         css = request.POST['css']
         Project_name = request.POST['Project_name']
-
+        w3 = Web3(Web3.HTTPProvider(
+        'https://polygon-mumbai.g.alchemy.com/v2/K59YdNGK95akCLJrA1m9nYPZ7JYNa8Me'))
         id = 1
         # Ploygon >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         name = Project_name
@@ -57,14 +50,14 @@ def savePage(request):
         # create an instance of the contract
         simple_storage = w3.eth.contract(
             address=contract_address, abi=contract_abi)
-        nonce = w3.eth.getTransactionCount(my_address)
+        nonce = w3.eth.get_transaction_count(my_address)
 
         print("transaction sucess..")
 
         greeting_transaction = simple_storage.functions.addPage(
-            id, name, image, description, html, css, preview_link).buildTransaction(
+            id, name, image, description, html, css, preview_link).build_transaction(
             {
-                "chainId": w3.eth.chainId,
+                "chainId": w3.eth.chain_id,
                 "gasPrice": w3.eth.gas_price,
                 "from": my_address,
                 # the initial nonce should "orginal nonce value" after that you should be increase nonce
