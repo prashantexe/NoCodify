@@ -20,17 +20,17 @@ def Code_scriping(request):
                     context['link_s'] = link
                     context['code_s'] = code
                 else:
-                    context['error'] = 'No example code found for the given question'
+                    context['error'] = "request timeout {-_-}... can't scarp the queary at a moment"
                 if code_gfg:
                     # Add the question, link and code to the context
                     context['question_gfg'] = question
                     context['link_gfg'] = link
                     context['code_gfg'] = code_gfg
             else:
-                context['error'] = 'No Stack Overflow link found for the given question'
+                context['error'] = "request timeout {-_-}... can't scarp the queary at a moment"
         else:
             context['error'] = 'Please enter a question'
-    return render(request,  'CodeScriping.html', context)
+    return render(request,  'AI_Functions/CodeScriping.html', context)
 
 
 def Error_Solver(request):
@@ -51,14 +51,14 @@ def Error_Solver(request):
                     context['link_s'] = link
                     context['code_s'] = code
                 else:
-                    context['error'] = 'No example code found for the given question'
+                    context['error'] = "request timeout {-_-}... can't scarp the queary at a moment"
                 if code_gfg:
                     # Add the question, link and code to the context
                     context['question_gfg'] = question
                     context['link_gfg'] = link
                     context['code_gfg'] = code_gfg
             else:
-                context['error'] = 'No Stack Overflow link found for the given question'
+                context['error'] = "request timeout {-_-}... can't scarp the queary at a moment"
         else:
             context['error'] = 'Please enter a question'
-    return render(request,  'Error_Solver.html', context)
+    return render(request,  'AI_Functions/Error_Solver.html', context)
