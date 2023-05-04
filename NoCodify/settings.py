@@ -15,7 +15,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+                
 my_address = '0x042bDdB896fa2B4F5993e3926b7dD53B27f9321E'
 private_key = '0x6021d22205954e378994c07b70dae0afd8e67b5eb61c8f799ebfd24f5f010708'
 
