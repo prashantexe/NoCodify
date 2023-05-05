@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 
 def get_content(query):
     # Search Google for web pages related to the query
-    urls = list(search(query, num_results=3))
+    urls = list(search(query, num_results=5))
     print("Web Scrap started")
     # Scrape the contents of each web page
     content = []
