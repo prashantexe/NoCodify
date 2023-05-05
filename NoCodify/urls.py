@@ -25,20 +25,18 @@ NoCodeMaker = [
     path('connect_metamask', common.connect_metamask, name='connect_metamask'),
     path('DisConnect', common.DisConnect, name='DisConnect'),
     path('save_wallet_address', common.save_wallet_address, name='save_wallet_address'),
-    path('automation', common.automation, name='automation'),
+    
     path('blog', common.blog, name='blog'),
-    path('compiler', common.compiler, name='compiler'),
+    
     path('add', NoCodeViews.addPage, name="addpage"),
     path('edit/<id>', NoCodeViews.editPage, name="editpage"),
     path('page/create', NoCodeViews.savePage, name="create_page"),
     path('editPage/<id>', NoCodeViews.editPageContent, name="editPageContent"),
     path('preview/<id>', NoCodeViews.previewPage, name='previewPage'),
-    path('Own_Gpt', NoCodeViews.Own_Gpt, name='Own_Gpt'),
+    
     path('chat_view', NoCodeViews.chat_view, name='chat_view'),
-    path('autogenerate', NoCodeViews.autogenerate, name='autogenerate'),
     path('url', NoCodeViews.url, name='url'),
     path('edits', NoCodeViews.edits, name='edits'),
-    path('Download_file', NoCodeViews.Download_file, name='Download_file'),
     path('ResumeBuilder', NoCodeViews.ResumeBuilder, name='ResumeBuilder'),
     path('block_detials/<str:block>',
          NoCodeViews.block_detials, name='block_detials'),
@@ -58,8 +56,6 @@ BlogBuilder = [
 ]
 
 AI_functions = [
-    path('Code_scriping', AI_Functions.Code_scriping),
-    path('Error_Solver', AI_Functions.Error_Solver),
     path('chatbot_res', AI_Functions.chatbot_res,name="chatbot_res"),
 ]
 

@@ -7,12 +7,10 @@ from ..models import Pages, ChatMessage, Blog
 from django.core.serializers import serialize
 import json
 from .Tool.Tools import random_image
-from .AI_Functions import Code_scriping
 import io
 from django.http import FileResponse
-from .Auto_generate_html import Make_web
 # Create your views here.
-from web3 import Web3, HTTPProvider
+from web3 import Web3
 from NoCodify.settings import my_address, private_key
 import os
 w3 = Web3(Web3.HTTPProvider(
@@ -173,10 +171,6 @@ def ResumeBuilder(request):
     return render(request, 'NoCodeBuilderPages/resume_maker.html')
 
 
-def Own_Gpt(request):
-    return render(request, 'gpt\index.html')
-
-
 def chat_view(request):
     if request.method == 'POST':
         prompt = request.POST.get('prompt')
@@ -186,29 +180,6 @@ def chat_view(request):
         return JsonResponse({'bot': response})
 
     return render(request, 'gpt/index.html', {'chat_messages': ChatMessage.objects.all()})
-
-
-def autogenerate(request):
-    if request.method == 'POST':
-        query = request.POST.get('query')
-        ProjectName = request.POST.get('ProjectName')
-        print(query, ProjectName)
-        a = Make_web(query, ProjectName)
-        print("connected..........")
-        code = a.create_page()
-        print("buffering.....")
-        buffer = io.BytesIO()
-        buffer.write(code.encode('utf-8'))
-        buffer.seek(0)
-        # Generate a file name for the minified HTML file
-        filename = 'Generated_code.html'
-
-        # Create a FileResponse object with the minified HTML data and the specified filename
-        response = FileResponse(
-            buffer, as_attachment=True, filename=filename)
-
-        return response
-    return render(request, 'common/Autogenerate.html')
 
 
 def url(request):
@@ -222,7 +193,6 @@ def Download_file(request):
         if 'Download' in request.POST:
             try:
                 # Download webpage
-
                 # Parse webpage using BeautifulSoup
                 soup = BeautifulSoup(response.text, 'html.parser')
 
