@@ -33,7 +33,7 @@ NoCodeMaker = [
     path('page/create', NoCodeViews.savePage, name="create_page"),
     path('editPage/<id>', NoCodeViews.editPageContent, name="editPageContent"),
     path('preview/<id>', NoCodeViews.previewPage, name='previewPage'),
-    
+    path('Download_file', NoCodeViews.Download_file, name='Download_file'),
     path('chat_view', NoCodeViews.chat_view, name='chat_view'),
     path('url', NoCodeViews.url, name='url'),
     path('edits', NoCodeViews.edits, name='edits'),
