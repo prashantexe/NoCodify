@@ -75,19 +75,16 @@ def listof_get_image_url(keyword, len):
 
 def get_answer_from_given_link(question_url):
     code = ''
-    response = requests.get(question_url)
-
+    try:
+        response = requests.get(question_url)
+    except:
+        return False
     soup = BeautifulSoup(response.content, 'html.parser')
     # responsive-tabs
     question_title = soup.find('a', class_='question-hyperlink').get_text()
-    print('Question:', question_title)
-
-    print('run next....')
     # Find the code blocks in the question and print them
     code_blocks = soup.find_all('pre')
-    print(code_blocks)
     for i, code_block in enumerate(code_blocks):
-        print(f'\nExample code {i+1}:')
         print(code_block.get_text())
         code = code+str(code_block)
     return code
