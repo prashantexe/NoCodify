@@ -72,6 +72,7 @@ def chatbot_res(request):
         print("\n\n\n\n\n\n\n\n\n\n\n",code)
         if code:
             response = code
+            return JsonResponse({"response": response})
         else:
             try:
                 wikipedia.set_lang("en")
