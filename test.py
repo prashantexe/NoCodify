@@ -1,13 +1,26 @@
-from solana.rpc.api import Client
+import execjs
 
-# Connect to Solana devnet
-client = Client("https://api.devnet.solana.com")
+# create a JavaScript context
+ctx = execjs.compile("""
+    const web3 = require("@solana/web3.js");
+(async () => {
+  const publicKey = new web3.PublicKey(
+    "E645TckHQnDcavVv92Etc6xSWQaq8zzPtPRGBheviRAk"
+  );
+  const solanaConnection = new web3.Connection("http://sample-endpoint-name.network.quiknode.pro/token-goes-here/", {
+    wsEndpoint: "wss://sample-endpoint-name.network.quiknode.pro/token-goes-here/",
+  });
+  solanaConnection.onAccountChange(
+    publicKey,
+    (updatedAccountInfo, context) =>
+      console.log("Updated account info: ", updatedAccountInfo),
+    "confirmed"
+  );
+})();
 
-# Specify the address to check balance for
-address = "0x042bDdB896fa2B4F5993e3926b7dD53B27f9321E"
+""")
+print(ctx)
 
-# Get the balance for the specified address
-balance = client.get_balance(address)
-
-# Print the balance
-print(f"Balance for {address}: {balance} lamports")
+# call a JavaScript function with arguments
+# result = ctx.call("add", 2, 3)
+# print(result)
