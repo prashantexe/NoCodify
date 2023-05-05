@@ -60,6 +60,7 @@ BlogBuilder = [
 AI_functions = [
     path('Code_scriping', AI_Functions.Code_scriping),
     path('Error_Solver', AI_Functions.Error_Solver),
+    path('chatbot_res', AI_Functions.chatbot_res,name="chatbot_res"),
 ]
 
 # Add Paths Together..............

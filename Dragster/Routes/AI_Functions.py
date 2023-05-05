@@ -1,6 +1,7 @@
 from .Tool.Tools import get_stackoverflow_link, get_example_code_gfg, get_answer_from_given_link
 from django.shortcuts import render
-
+from django.http import JsonResponse
+import wikipedia
 
 def Code_scriping(request):
     context = {}
@@ -32,6 +33,25 @@ def Code_scriping(request):
             context['error'] = 'Please enter a question'
     return render(request,  'AI_Functions/CodeScriping.html', context)
 
+def chatbot_res(request):
+    if request.method == "GET":
+        message = request.GET.get("message")
+        print(message)
+        link = get_stackoverflow_link(message)
+        code = get_answer_from_given_link(link)
+        # process the user input and generate a response
+        print("\n\n\n\n\n\n\n\n\n\n\n",code)
+        if code:
+            response = code
+        else:
+            wikipedia.set_lang("en")
+            # Get the summary of a page
+            page = wikipedia.page(message)
+            summary = page.summary
+            response = summary
+        return JsonResponse({"response": response})
+    else:
+        return JsonResponse({"error": "Invalid request method"})
 
 def Error_Solver(request):
     context = {}
